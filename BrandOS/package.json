@@ -1,0 +1,44 @@
+{
+  "name": "react-example",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "vite build",
+    "start": "NODE_ENV=production node server.js",
+    "preview": "vite preview",
+    "clean": "rm -rf dist",
+    "lint": "node --check server.js && node --check vite.config.js && node --check src/server/routes.js && node --check src/server/reviewEngine.js && node --check src/server/auth.js && node --check src/db/schema.js && node --check src/db/drizzle.config.js && node --check src/db/index.js && node --check src/db/seed.js",
+    "db:push": "drizzle-kit push --config=src/db/drizzle.config.js",
+    "db:seed": "node src/db/seed.js"
+  },
+  "dependencies": {
+    "@google/genai": "^3.4.0",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "axios": "^1.21.1",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.11",
+    "drizzle-orm": "^0.45.4",
+    "express": "^4.21.2",
+    "firebase": "^13.4.0",
+    "firebase-admin": "^14.5.1",
+    "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.546.0",
+    "mammoth": "^1.13.0",
+    "motion": "^12.23.24",
+    "multer": "^2.5.0",
+    "pg": "^8.23.1",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "react-hook-form": "^7.92.0",
+    "react-router-dom": "^7.18.5",
+    "vite": "^8.3.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "tailwindcss": "^4.3.3"
+  }
+}

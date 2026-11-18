@@ -1,0 +1,6 @@
+{
+  "name": "NovaTech — Intelligent Technology & BrandOS Portal",
+  "description": "Corporate website for NovaTech featuring public Insights governance, customer accounts, employee dashboards, administration controls, and secure BrandOS workflow integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

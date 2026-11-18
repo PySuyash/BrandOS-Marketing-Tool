@@ -1,0 +1,6 @@
+{
+  "name": "BrandOS — AI-Powered Brand Governance Platform",
+  "description": "Department-specific brand governance platform for reviewing employee-created copy and DOCX documents against approved rules, tone profiles, and verified facts with a source-backed Claim Ledger.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
