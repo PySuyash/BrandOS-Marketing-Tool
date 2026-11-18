@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "vite build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "node --check server.js && node --check vite.config.js && node --check src/server/routes.js && node --check src/server/reviewEngine.js && node --check src/server/auth.js && node --check src/db/schema.js && node --check src/db/drizzle.config.js && node --check src/db/index.js && node --check src/db/seed.js",
