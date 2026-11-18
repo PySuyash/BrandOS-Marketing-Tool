@@ -1,10 +1,9 @@
+
 import 'dotenv/config';
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { apiRouter } from './src/server/routes.js';
-
-// dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,6 +16,14 @@ async function startServer() {
   app.set('trust proxy', 1);
   app.use(express.json({ limit: '10mb' }));
   app.use(express.urlencoded({ extended: true }));
+
+  // Health check endpoint
+  app.get('/health', (_req, res) => {
+    res.status(200).json({
+      status: 'OK',
+      message: 'BrandOS backend is running',
+    });
+  });
 
   // Mount REST API
   app.use('/api', apiRouter);
@@ -31,6 +38,7 @@ async function startServer() {
   } else {
     const distPath = path.resolve(__dirname, 'dist');
     app.use(express.static(distPath));
+
     app.get('*', (_req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
