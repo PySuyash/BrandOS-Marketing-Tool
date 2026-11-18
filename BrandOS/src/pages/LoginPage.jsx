@@ -1,6 +1,12 @@
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, Mail, ArrowRight } from 'lucide-react';
+import {
+  ShieldCheck,
+  Lock,
+  Mail,
+  ArrowRight,
+} from 'lucide-react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useToast } from '../context/ToastContext.jsx';
 import { api } from '../lib/api.js';
@@ -31,7 +37,7 @@ export function LoginPage() {
         setDemoPassword(res.data.demoPasswordHint || '');
       })
       .catch(() => {
-        // ignore if unavailable
+        // Ignore if unavailable
       });
   }, []);
 
@@ -39,6 +45,7 @@ export function LoginPage() {
     e.preventDefault();
     setError(null);
     setSubmitting(true);
+
     try {
       await loginWithCredentials(email, password);
       notify('Signed in to BrandOS.', 'success');
@@ -57,6 +64,7 @@ export function LoginPage() {
     setPassword(demoPassword);
     setError(null);
     setSubmitting(true);
+
     try {
       await loginWithCredentials(acct.email, demoPassword);
       notify(`Signed in as ${acct.name} (${acct.role}).`, 'success');
@@ -71,13 +79,16 @@ export function LoginPage() {
   const handleGoogleSignIn = async () => {
     setError(null);
     setSubmitting(true);
+
     try {
       await loginWithGoogle();
       notify('Signed in with Google Workspace.', 'success');
       navigate('/');
     } catch (err) {
       const msg =
-        err instanceof Error ? err.message : 'Google sign-in cancelled or failed.';
+        err instanceof Error
+          ? err.message
+          : 'Google sign-in cancelled or failed.';
       setError(msg);
     } finally {
       setSubmitting(false);
@@ -87,6 +98,7 @@ export function LoginPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
         {/* Left column: Employee Sign-In Form */}
         <div className="lg:col-span-6 bg-white border border-slate-200 rounded-xl p-8 flex flex-col justify-between">
           <div>
@@ -94,6 +106,7 @@ export function LoginPage() {
               <div className="h-9 w-9 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
                 <ShieldCheck className="h-5 w-5" />
               </div>
+
               <span className="font-display text-xl font-bold tracking-tight text-slate-900">
                 BrandOS
               </span>
@@ -102,8 +115,10 @@ export function LoginPage() {
             <h1 className="font-display text-2xl font-bold text-slate-900 tracking-tight">
               Employee Brand Governance Portal
             </h1>
+
             <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-              Sign in with your assigned department account to submit content, inspect Claim Ledger evidence, and manage approvals.
+              Sign in with your assigned department account to submit content,
+              inspect Claim Ledger evidence, and manage approvals.
             </p>
 
             {error && (
@@ -117,8 +132,10 @@ export function LoginPage() {
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Work Email
                 </label>
+
                 <div className="relative">
                   <Mail className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+
                   <input
                     type="email"
                     required
@@ -134,8 +151,10 @@ export function LoginPage() {
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                   Password
                 </label>
+
                 <div className="relative">
                   <Lock className="h-4 w-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+
                   <input
                     type="password"
                     required
@@ -152,7 +171,9 @@ export function LoginPage() {
                 disabled={submitting}
                 className="w-full flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 disabled:opacity-60 transition-colors"
               >
-                <span>{submitting ? 'Signing in...' : 'Sign In to Workspace'}</span>
+                <span>
+                  {submitting ? 'Signing in...' : 'Sign In to Workspace'}
+                </span>
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
@@ -170,7 +191,8 @@ export function LoginPage() {
           </div>
 
           <p className="mt-6 text-xs text-slate-500">
-            Core principle: No proof, no flag. Every finding and claim links to verified department guidelines or approved knowledge sources.
+            Core principle: No proof, no flag. Every finding and claim links
+            to verified department guidelines or approved knowledge sources.
           </p>
         </div>
 
@@ -179,8 +201,11 @@ export function LoginPage() {
           <h2 className="font-display text-base font-bold text-slate-900">
             Prototype Demo Accounts
           </h2>
+
           <p className="mt-1 text-xs text-slate-500">
-            Select any role below to sign in and walk through department-specific reviews, Claim Ledger verification, and approvals.
+            Select any role below to sign in and walk through
+            department-specific reviews, Claim Ledger verification, and approvals.
+
             {demoPassword && (
               <span className="block mt-1 font-mono text-slate-700">
                 Common demo password: {demoPassword}
@@ -190,7 +215,9 @@ export function LoginPage() {
 
           <div className="mt-4 divide-y divide-slate-100 border border-slate-200 rounded-lg overflow-hidden">
             {demoAccounts.length === 0 ? (
-              <div className="p-4 text-xs text-slate-500">Loading demo accounts...</div>
+              <div className="p-4 text-xs text-slate-500">
+                Loading demo accounts...
+              </div>
             ) : (
               demoAccounts.map((acct) => (
                 <button
@@ -204,10 +231,12 @@ export function LoginPage() {
                     <div className="text-sm font-semibold text-slate-900 truncate">
                       {acct.name}
                     </div>
+
                     <div className="text-xs text-slate-500 truncate">
                       {acct.email} · {acct.departmentName || 'Cross-Department'}
                     </div>
                   </div>
+
                   <div className="shrink-0 text-right">
                     <span className="text-xs font-semibold text-indigo-700">
                       {acct.role}
@@ -218,6 +247,18 @@ export function LoginPage() {
             )}
           </div>
         </div>
+
+        {/* Back to NovaTech Button */}
+        <div className="col-span-full flex justify-center mt-2">
+          <a
+            href="https://brandos-marketing-tool.onrender.com"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-indigo-200 bg-white px-6 py-3 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 hover:border-indigo-300 transition-colors shadow-sm"
+          >
+            <ArrowRight className="h-4 w-4 rotate-180" />
+            Back to NovaTech
+          </a>
+        </div>
+
       </div>
     </div>
   );
